@@ -1,21 +1,14 @@
-# Kundi
+# Kundi Test Assignment
 
-**TODO: Add description**
+See `/docs/requirements.txt`
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `kundi` to your list of dependencies in `mix.exs`:
+Just use ``make`` to get everything.
 
-```elixir
-def deps do
-  [
-    {:kundi, "~> 0.1.0"}
-  ]
-end
-```
+Starting in interactive console:
+```make run```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/kundi](https://hexdocs.pm/kundi).
+Starting as daemon ```make start```
+Stop daemon ```make stop```
 

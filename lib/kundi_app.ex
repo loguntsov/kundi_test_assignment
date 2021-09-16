@@ -15,12 +15,15 @@ defmodule KundiApp do
       :world
 
   """
-  def start(start_type, start_args) do
+  
+  @app :kundi
+  
+  def start(_start_type, _start_args) do
     dispatch = :cowboy_router.compile([
         {:_, [
               {"/", :cowboy_static, {:priv_file, :kundi, "www/index.html"}},
-              {"/ws", :ws_h, []},
-              {"/static/[...]", :cowboy_static, {:priv_dir, :websocket, "static"}}
+              {"/ws", KundiWsHandler, []},
+              {"/static/[...]", :cowboy_static, {:priv_dir, :kundi, "www/static"}}
         ]}
     ])
     Logger.info("Starting application")
@@ -30,6 +33,12 @@ defmodule KundiApp do
        }
     })
 
+    KundiAppSup.Supervisor.start_link()
+  end
+  
+  def get_env(key) do
+    { :ok, value } = :application.get_env(@app, key)
+    value
   end
 end
 

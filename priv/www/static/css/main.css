@@ -1,0 +1,38 @@
+.selected {
+   border:1px solid
+}
+
+.warior1 {
+    background: /static/img/warior1.png
+}
+
+.warior2 {
+    background: /static/img/warior2.png;
+}
+
+.warior3 {
+    background: /static/img/warior3.png;
+}
+
+.dead1 {
+    background: /static/img/dead.png;
+}
+
+.wall {
+    background-color: black
+}
+
+#board {
+
+}
+
+#board td {
+    width: 32px;
+    height: 32px;
+    padding: 0px;
+    spacing: 0px;
+}
+#board td img {
+    width: 32px;
+    height: 32px;
+}
