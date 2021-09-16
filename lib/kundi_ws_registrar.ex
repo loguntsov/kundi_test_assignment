@@ -17,4 +17,8 @@ defmodule KundiWsRegistrar do
     end)
   end
   
+  def broadcast(event, params) do
+    KundiWsRegistrar.broadcast(KundiWsProtocol.event(event,params))
+  end
+  
 end

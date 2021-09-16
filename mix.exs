@@ -18,8 +18,11 @@ defmodule Kundi.MixProject do
       env: [
         # Port for HTTP-listener
         port: 8080,
+        ## Size of board
         width: 10,
-        height: 10
+        height: 10,
+        ## Dead timeout
+        dead_timeout: 5000
       ],
       mod: { KundiApp, []}
     ]

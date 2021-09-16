@@ -7,14 +7,20 @@ defmodule KundiPlayerRegistrar do
     Registry.child_spec(name: @name, keys: :unique)
   end
   
-  def get(name) do
+  def pid(name) do
     case Registry.lookup(@name, name) do
       [{pid, _}] -> { :ok, pid }
-      [] -> :nil
+      [] -> nil
     end
   end
   
   def register(name) do
-    Registry.register(@name, name, :nil)
+    Registry.register(@name, name, nil)
   end
+  
+  def pid!(name) do
+    { :ok, pid } = KundiPlayerRegistrar.pid(name)
+    pid
+  end
+  
 end

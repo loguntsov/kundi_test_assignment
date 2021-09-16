@@ -73,9 +73,21 @@ callbacks["put"] = function(data) {
     board_set(data.x, data.y, data.player)
 }
 
+callbacks["clean"] = function(data) {
+    board_clean(data.x, data.y)
+}
+
 callbacks["move"] = function(data) {
     board_clean(data.old_pos.x, data.old_pos.y)
     board_set(data.new_pos.x, data.new_pos.y, data.player)
+}
+callbacks["dead"] = function(data) {
+    board_set(data.x, data.y, "dead")
+}
+
+callbacks["attack"] = function(data) {
+    board_set(data.x, data.y, "attack")
+    setTimeout(function() { board_set(data.x, data.y, data.player) }, 300)
 }
 
 function cell_name(x, y) {
@@ -87,16 +99,25 @@ function board_clean(x, y) {
 }
 
 function board_set(x, y, what) {
-    var html;
-
+    var html = "";
+    if (what == 'attack') {
+        html = "<img src='/static/img/attack.png'/>"
+    }
     if (what == 'wall') {
         html = "<img src='/static/img/wall.png'/>"
     } else
     if ( what.icon ) {
         css_class = (what.name == name) ? " class='selected' " : "";
-        html = "<img src='"+what.icon+"'"+css_class+"/>";
+        html = "<img src='"+what.icon+"'"+css_class+" title='"+info(what)+"'/>";
+    } else
+    if ( what == "dead") {
+        html = "<img src='/static/img/dead.png'/>"
     }
     document.getElementById(cell_name(x, y)).innerHTML = html;
+}
+
+function info(player) {
+    return JSON.stringify(player)
 }
 
 function send(cmd, params) {

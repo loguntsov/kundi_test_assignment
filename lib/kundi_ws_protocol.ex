@@ -17,7 +17,7 @@ defmodule KundiWsProtocol do
       els: board
     }))
     KundiWsRegistrar.register()
-    case KundiPlayerRegistrar.get(name) do
+    case KundiPlayerRegistrar.pid(name) do
       {:ok, _pid } -> :ok
       nil ->
         player = KundiPlayer.default(name, :warior)
@@ -47,12 +47,16 @@ defmodule KundiWsProtocol do
   end
   
   def command("attack", _, state) do
+    KundiPlayerServer.attack(pid(state))
+    state
   end
   
   def command(any, params, state) do
     Logger.info("Unknown commands: #{inspect(any)} with params: #{inspect(params)} ")
     state
   end
+
+  ## EVENTS
 
   def event(event, params) do
     %{
@@ -64,7 +68,7 @@ defmodule KundiWsProtocol do
   ## Private
   
   defp pid(state) do
-    { :ok, pid } = KundiPlayerRegistrar.get(state.name)
-    pid
+    KundiPlayerRegistrar.pid!(state.name)
   end
+  
 end

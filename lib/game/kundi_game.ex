@@ -43,11 +43,11 @@ defmodule KundiGame do
   end
 
   def at_near(game, x, y) do
-    List.foldl([{x-1, y-1}, {x-1, y}, { x-1, y+1 }, {x, y-1 }, { x, y+1 }, { x+1, y-1 }, {x+1, y }, {x+1, y+1 }], fn {x0, y0}, acc ->
+    List.foldl([{x-1, y-1}, {x-1, y}, { x-1, y+1 }, {x, y-1 }, { x, y+1 }, { x+1, y-1 }, {x+1, y }, {x+1, y+1 }], [], fn {x0, y0}, acc ->
       el = get(game, x0, y0)
       case el do
         :none -> acc;
-        _ -> [ el | acc ]
+        _ -> [ {{x0, y0}, el} | acc ]
       end
     end)
   end

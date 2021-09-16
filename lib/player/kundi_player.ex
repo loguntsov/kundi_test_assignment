@@ -17,10 +17,10 @@ defmodule KundiPlayer do
   def attack(player1, player2) do
     rand = :rand.uniform()
     cond do
-      rand > player1.skill / player2.skill ->
-        { :win_2, %Player{ player1 | life: player1.life - player2.skill }, player2 }
+      rand > player1.skill / (player2.skill + player1.skill ) ->
+        { :win_2, -player2.skill, 0 }
       true ->
-        { :win_1, player1, %Player{ player2 | life: player2.life - player1.skill } }
+        { :win_1, 0, -player1.skill }
     end
   end
   
@@ -30,10 +30,10 @@ defmodule KundiPlayer do
   
   def default(name, type) do
     icon = case type do
-      :warior -> "/static/img/warior1.png"
-      :monster -> "/static/img/monster1.png"
+      :warior -> Enum.random(["/static/img/warior1.png","/static/img/warior2.png", "/static/img/warior3.png"])
+      :monster -> Enum.random(["/static/img/monster1.png","/static/img/monster3.png", "/static/img/monster3.png"])
     end
-    init(name, type, 1, icon)
+    init(name, type, 10, icon)
   end
   
 end
