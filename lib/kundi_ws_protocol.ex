@@ -1,4 +1,5 @@
 defmodule KundiWsProtocol do
+  @moduledoc false
   require Logger
   
   @moduledoc false

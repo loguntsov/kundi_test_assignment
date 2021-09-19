@@ -1,5 +1,6 @@
 defmodule KundiGameServer do
-
+  @moduledoc false
+  
   require Logger
   
   @moduledoc false
@@ -39,6 +40,7 @@ defmodule KundiGameServer do
 
   def init([]) do
     game = Game.init(App.get_env(:width), App.get_env(:height))
+    Game.walls(game, 10)
     {:ok, game}
   end
 

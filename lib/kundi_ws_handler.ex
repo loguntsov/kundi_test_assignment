@@ -1,8 +1,10 @@
 defmodule KundiWsHandler.State do
+  @moduledoc false
   defstruct [:name]
 end
 
 defmodule KundiWsHandler do
+  @moduledoc false
   require Logger
   
   alias KundiWsHandler.State, as: State
@@ -45,6 +47,10 @@ defmodule KundiWsHandler do
         Logger.info("Bad json: #{json}")
         {[], state }
     end
+  end
+  
+  def websocket_handle({:ping, _ }, state) do
+    {[{:pong, "PONG"}], state}
   end
   
   def websocket_handle(term, state) do

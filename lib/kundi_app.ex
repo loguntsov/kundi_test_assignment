@@ -4,16 +4,12 @@ defmodule KundiApp do
 
   @moduledoc """
   Documentation for `Kundi`.
+  
+    This is simple test assigment
+    Author is Sergey Loguntsov <loguntsov@gmail.com>
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Kundi.hello()
-      :world
-
   """
   
   @app :kundi
@@ -35,6 +31,10 @@ defmodule KundiApp do
 
     KundiAppSup.Supervisor.start_link()
   end
+  
+  @ doc """
+    Gets environment key of application
+  """
   
   def get_env(key) do
     { :ok, value } = :application.get_env(@app, key)
